@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <h3 class="title">vue-admin-template</h3>
       <el-form-item prop="username">
-        <span class="svg-container svg-container_login">
+        <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="username" />
@@ -30,7 +30,7 @@
       </el-form-item>
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
-        <span> password: admin</span>
+        <span> password: 123456</span>
       </div>
     </el-form>
   </div>
@@ -59,7 +59,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: 'admin'
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -174,9 +174,6 @@ $light_gray:#eee;
     vertical-align: middle;
     width: 30px;
     display: inline-block;
-    &_login {
-      font-size: 20px;
-    }
   }
   .title {
     font-size: 26px;
