@@ -142,7 +142,7 @@ export default {
       listLoading: true,
       services: [],
       profiles: [],
-      status: ['ACTIVE', 'DEL'],
+      status: ['ACTIVE', 'DELETE'],
       form: {
         name: '',
         status: '',

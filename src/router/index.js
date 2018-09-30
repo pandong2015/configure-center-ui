@@ -58,6 +58,33 @@ export const constantRouterMap = [
       }
     ]
   },
+  {
+    path: '/system',
+    component: Layout,
+    redirect: '/system/profile',
+    name: 'System',
+    meta: { title: 'System', icon: 'example' },
+    children: [
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import('@/views/module/system/profile/index'),
+        meta: { title: 'Profile', icon: 'table' }
+      },
+      {
+        path: 'role',
+        name: 'Role',
+        component: () => import('@/views/module/system/role/index'),
+        meta: { title: 'Role', icon: 'table' }
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: () => import('@/views/module/system/user/index'),
+        meta: { title: 'User', icon: 'table' }
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

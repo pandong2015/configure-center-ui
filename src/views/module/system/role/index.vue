@@ -22,7 +22,7 @@
               <el-input v-model="createForm.name"/>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="save(user.id)">提交</el-button>
+              <el-button type="primary" @click="save">提交</el-button>
             </el-form-item>
           </el-form>
         </el-dialog>
@@ -45,7 +45,6 @@
           <el-table v-loading="listLoading" ref="multipleTable" :data="tableData" stripe border style="width: 100%" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"/>
             <el-table-column prop="name" label="Name"/>
-            <el-table-column prop="userName" label="User Name"/>
             <el-table-column prop="status" label="Status"/>
             <el-table-column prop="createTime" label="Create Time"/>
             <el-table-column prop="updateTime" label="Update Time"/>
@@ -75,8 +74,7 @@
 </template>
 
 <script>
-import { getList, createService, editService, del } from '@/api/service'
-import { mapGetters } from 'vuex'
+import { getList, create, edit, del } from '@/api/role'
 
 export default {
   data() {
@@ -87,14 +85,13 @@ export default {
       currentPage: 1,
       multipleSelection: [],
       listLoading: true,
-      status: ['ACTIVE', 'DELETEs'],
+      status: ['ACTIVE', 'DELETE'],
       form: {
         name: null,
         status: null
       },
       createForm: {
-        name: null,
-        userId: null
+        name: null
       },
       editVisible: false,
       searchVisible: false,
@@ -102,11 +99,6 @@ export default {
       selectRow: null,
       scope: null
     }
-  },
-  computed: {
-    ...mapGetters([
-      'user'
-    ])
   },
   created() {
     this.getTableData()
@@ -160,15 +152,14 @@ export default {
       }
       this.scope = 'insert'
     },
-    save(id) {
-      this.createForm.userId = id
+    save() {
       var body = this.createForm
       var method = null
       if (this.scope === 'insert') {
-        method = createService
+        method = create
       }
       if (this.scope === 'edit') {
-        method = editService
+        method = edit
       }
       method(body).then((result) => {
         this.reload(result)
