@@ -2,22 +2,22 @@
   <div class="app-container">
     <el-row class="tac">
       <el-row type="flex" class="tac" justify="end">
-        <el-button type="primary" @click="searchBefore()">查询</el-button>
-        <el-button type="primary" @click="createNewBefore()">新建</el-button>
-        <el-button type="primary" @click="copyBefore()">Copy</el-button>
+        <el-button type="primary" @click="searchBefore()">{{ $t("message.search") }}</el-button>
+        <el-button type="primary" @click="createNewBefore()">{{ $t("message.create") }}</el-button>
+        <el-button type="primary" @click="copyBefore()">{{ $t("message.copy") }}</el-button>
       </el-row>
       <el-row class="tac">
         <el-dialog
           :visible.sync="deleteVisible"
           title="提示"
           width="30%">
-          <span>删除记录吗?</span>
+          <span>{{ $t("message.delete") }}</span>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteVisible = false">取 消</el-button>
-            <el-button type="primary" @click="remove()">确 定</el-button>
+            <el-button @click="deleteVisible = false">{{ $t("message.no") }}</el-button>
+            <el-button type="primary" @click="remove()">{{ $t("message.yes") }}</el-button>
           </span>
         </el-dialog>
-        <el-dialog :visible.sync="editVisible" title="编辑">
+        <el-dialog :visible.sync="editVisible" :title="$t('message.edit')">
           <el-form ref="form" :model="createForm" label-width="80px">
             <el-form-item label="Name">
               <el-input v-model="createForm.name"/>
@@ -40,7 +40,7 @@
             </el-form-item>
           </el-form>
         </el-dialog>
-        <el-dialog :visible.sync="searchVisible" title="查询">
+        <el-dialog :visible.sync="searchVisible" :title="$t('message.search')">
           <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="Name">
               <el-input v-model="form.name"/>
@@ -65,7 +65,7 @@
             </el-form-item>
           </el-form>
         </el-dialog>
-        <el-dialog :visible.sync="copyVisible" title="Copy">
+        <el-dialog :visible.sync="copyVisible" :title="$t('message.copy')">
           <el-form ref="form" :model="copyForm" label-width="80px">
             <el-form-item label="Source Service">
               <el-select v-model="copyForm.sourceServiceId" placeholder="请选择">
@@ -103,7 +103,7 @@
             <el-table-column prop="updateTime" label="Update Time"/>
             <el-table-column fixed="right" label="操作" width="100">
               <template slot-scope="scope">
-                <el-button type="text" size="small" @click="editBefore(scope.row)">编辑</el-button>
+                <el-button type="text" size="small" @click="editBefore(scope.row)">{{ $t('message.edit') }}</el-button>
                 <el-button type="text" size="small" @click="removeBefore(scope.row)">删除</el-button>
               </template>
             </el-table-column>

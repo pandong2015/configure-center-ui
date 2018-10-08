@@ -10,10 +10,10 @@
           :visible.sync="deleteVisible"
           title="提示"
           width="30%">
-          <span>删除记录吗?</span>
+          <span>{{ $t("message.delete") }}</span>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteVisible = false">取 消</el-button>
-            <el-button type="primary" @click="remove()">确 定</el-button>
+            <el-button @click="deleteVisible = false">{{ $t("message.no") }}</el-button>
+            <el-button type="primary" @click="remove()">{{ $t("message.yes") }}</el-button>
           </span>
         </el-dialog>
         <el-dialog :visible.sync="editVisible" title="编辑">

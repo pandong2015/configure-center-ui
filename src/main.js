@@ -15,6 +15,8 @@ import store from './store'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import i18n from './lang/i18n'
+
 Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
@@ -22,6 +24,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  i18n,
   store,
   render: h => h(App)
 })

@@ -10,10 +10,20 @@
           :visible.sync="deleteVisible"
           title="提示"
           width="30%">
-          <span>删除记录吗?</span>
+          <span>{{ $t("message.delete") }}</span>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteVisible = false">取 消</el-button>
-            <el-button type="primary" @click="remove()">确 定</el-button>
+            <el-button @click="deleteVisible = false">{{ $t("message.no") }}</el-button>
+            <el-button type="primary" @click="remove()">{{ $t("message.yes") }}</el-button>
+          </span>
+        </el-dialog>
+        <el-dialog
+          :visible.sync="renewVisible"
+          title="提示"
+          width="30%">
+          <span>确认重置密码吗?</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="renewVisible = false">{{ $t("message.no") }}</el-button>
+            <el-button type="primary" @click="renewPassword()">{{ $t("message.yes") }}</el-button>
           </span>
         </el-dialog>
         <el-dialog :visible.sync="editVisible" title="编辑">
@@ -66,6 +76,7 @@
               <template slot-scope="scope">
                 <el-button type="text" size="small" @click="editBefore(scope.row)">编辑</el-button>
                 <el-button type="text" size="small" @click="removeBefore(scope.row)">删除</el-button>
+                <el-button type="text" size="small" @click="renewBefore(scope.row)">重置密码</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -88,7 +99,7 @@
 </template>
 
 <script>
-import { getList, create, edit, del } from '@/api/user'
+import { getList, create, edit, del, renew } from '@/api/user'
 
 export default {
   data() {
@@ -114,6 +125,7 @@ export default {
       editVisible: false,
       searchVisible: false,
       deleteVisible: false,
+      renewVisible: false,
       selectRow: null,
       scope: null
     }
@@ -197,6 +209,18 @@ export default {
     removeBefore(row) {
       this.deleteVisible = true
       this.selectRow = row
+    },
+    renewBefore(row) {
+      this.renewVisible = true
+      this.selectRow = row
+    },
+    renewPassword() {
+      renew(this.selectRow.id).then((result) => {
+
+      }).catch((err) => {
+        console.log(err)
+      })
+      this.renewVisible = false
     },
     remove() {
       this.deleteVisible = false

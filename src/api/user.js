@@ -30,3 +30,10 @@ export function del(id) {
     method: 'delete'
   })
 }
+
+export function renew(id) {
+  return request({
+    url: '/data/user/renew/' + id,
+    method: 'get'
+  })
+}
